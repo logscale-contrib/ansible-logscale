@@ -27,6 +27,7 @@
   serial: 1
   tasks:
     - name: Create a user 'kafka' with a home directory
+      become: true
       ansible.builtin.user:
         name: kafka
         create_home: yes
