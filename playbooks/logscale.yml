@@ -27,19 +27,6 @@
   serial: 1
   become: true
   tasks:
-    - name: Ensure group "kafka" exists
-      ansible.builtin.group:
-        name: kafka-controller
-        gid: 10001
-        state: present  
-    - name: Create a user 'kafka' with a home directory
-      ansible.builtin.user:
-        name: kafka-controller
-        create_home: yes
-        system: true
-        shell: /sbin/nologin
-        uid: 10001
-        group: kafka-controller
     - name: Create a Quadlet file for a volume
       containers.podman.podman_volume:
         state: quadlet
