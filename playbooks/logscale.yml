@@ -46,7 +46,7 @@
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
         # network: host
-        user: kafka
+        user: 10000
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
