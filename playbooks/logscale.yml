@@ -33,6 +33,8 @@
         create_home: yes
         system: true
         shell: /sbin/nologin
+        uid: 10000
+        gid: 10000
     - name: Create a Quadlet file for a volume
       containers.podman.podman_volume:
         state: quadlet
