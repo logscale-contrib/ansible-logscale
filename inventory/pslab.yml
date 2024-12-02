@@ -23,6 +23,8 @@ brokers:
       ansible_host: 10.0.153.106
     broker3:
       ansible_host: 10.0.167.55
+    vars:
+      kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
 controllers:
   hosts:
     controller1:
@@ -31,3 +33,5 @@ controllers:
       ansible_host: 10.0.152.234
     controller3:
       ansible_host: 10.0.161.58
+    vars:
+      kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
