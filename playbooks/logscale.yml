@@ -1,15 +1,18 @@
----
-- name: Common Steps
+- name: Add to known_hosts
   hosts: all
   tasks:
-    - name: Install Podman
-      become: true
-      block:
-        - name: Ensure Podman is installed
-          ansible.builtin.dnf:
-            name: podman
-            state: present
-- name: Install Podman
+    - name: get port, default 22
+      delegate_to: localhost
+      set_fact:
+        ansible_ssh_port: "{{ hostvars[inventory_hostname]['ansible_ssh_port'] | default('22') }}"
+    - name: Ensure ssh host key known
+      delegate_to: localhost
+      lineinfile:
+        dest: ~/.ssh/known_hosts
+        create: yes
+        state: present
+        line: "{{ lookup('pipe', 'ssh-keyscan -trsa -p' + ansible_ssh_port + ' ' + ansible_ssh_host) }}"
+- name: Common Steps
   hosts: all
   tasks:
     - name: Install Podman
