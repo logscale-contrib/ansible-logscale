@@ -50,9 +50,9 @@
         #   - "8080:80"
         # volumes:
         #   - "kafkadata:/usr/share/nginx/html"
-        quadlet_options:
-          - "AutoUpdate=registry"
-          - "Pull=newer"
-          - |
-            [Install]
-            WantedBy=default.target
+        # quadlet_options:
+        #   - "AutoUpdate=registry"
+        #   - "Pull=newer"
+        #   - |
+        #     [Install]
+        #     WantedBy=default.target
