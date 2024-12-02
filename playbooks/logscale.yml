@@ -23,15 +23,16 @@
             name: podman
             state: present
 
-- name: Kafka Steps
+- name: Kafka Controllers
   hosts: controllers
   serial: 1
   tasks:
     - name: create kafka
+      become: true
       containers.podman.podman_container:
         name: kafka
         image: apache/kafka:3.9.0
-        state: quadlet
+        state: absent
         # device: "/dev/sda:/dev/xvda:rwm"
         network: host
         env:
