@@ -1,16 +1,16 @@
 all:
   hosts:
     kafka1:
-      ansible_host: 10.0.133.232
+      ansible_host: 10.0.140.39
     kafka2:
-      ansible_host: 10.0.156.191
+      ansible_host: 10.0.153.106
     kakfa3:
-      ansible_host: 10.0.38.16
+      ansible_host: 10.0.167.55
 kafka:
   hosts:
     kafka1:
-      ansible_host: 10.0.133.232
+      ansible_host: 10.0.140.39
     kafka2:
-      ansible_host: 10.0.156.191
+      ansible_host: 10.0.153.106
     kakfa3:
-      ansible_host: 10.0.38.16
+      ansible_host: 10.0.167.55

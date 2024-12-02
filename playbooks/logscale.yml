@@ -1,9 +1,21 @@
 ---
-- name: Update web servers
+- name: Install Podman
   hosts: all
   # remote_user: root
 
   tasks:
+    - name: get port, default 22
+      delegate_to: localhost
+      set_fact:
+        ansible_ssh_port: "{{ hostvars[inventory_hostname]['ansible_ssh_port'] | default('22') }}"
+
+    - name: Ensure ssh host key known
+      delegate_to: localhost
+      lineinfile:
+        dest: ~/.ssh/known_hosts
+        create: yes
+        state: present
+        line: "{{ lookup('pipe', 'ssh-keyscan -trsa -p' + ansible_ssh_port + ' ' + ansible_ssh_host) }}"
     - name: Install Podman
       become: true
       block:
