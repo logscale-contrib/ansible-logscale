@@ -27,6 +27,7 @@
   serial: 1
   tasks:
     - name: Create a Quadlet file for a volume
+      become: true
       containers.podman.podman_volume:
         state: quadlet
         name: kafkadata
