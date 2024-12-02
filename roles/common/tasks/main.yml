@@ -1,0 +1,9 @@
+---
+- name: Install Podman
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure Podman is installed
+      package:
+        name: podman
+        state: present
