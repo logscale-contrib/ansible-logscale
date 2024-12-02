@@ -32,6 +32,7 @@
         name: kafka
         create_home: yes
         system: true
+        shell: /sbin/nologin
     - name: Create a Quadlet file for a volume
       containers.podman.podman_volume:
         state: quadlet
