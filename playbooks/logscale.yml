@@ -26,15 +26,22 @@
   hosts: controllers
   serial: 1
   tasks:
+    - name: Create a user 'kafka' with a home directory
+      ansible.builtin.user:
+        name: kafka
+        create_home: yes
+        system: true
     - name: Create a Quadlet file for a volume
       become: true
+      become_user: kafka
       containers.podman.podman_volume:
         state: quadlet
         name: kafkadata
     - name: create kafka
       become: true
+      become_user: kafka
       containers.podman.podman_container:
-        name: kafka
+        name: kafka-controller
         image: apache/kafka:3.9.0
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
@@ -57,11 +64,12 @@
         #   - |
         #     [Install]
         #     WantedBy=default.target
-    - name: Enable service kafka and ensure it is not masked
-      become: true
-      ansible.builtin.systemd_service:
-        name: kafka
-        daemon_reload: true
-        enabled: true
-        masked: no
-        state: started
+    # - name: Enable service kafka and ensure it is not masked
+    #   become: true
+    #   become_user: kafka-controller
+    #   ansible.builtin.systemd_service:
+    #     name: kafka
+    #     daemon_reload: true
+    #     enabled: true
+    #     masked: no
+    #     state: started
