@@ -27,6 +27,11 @@
   serial: 1
   become: true
   tasks:
+    - name: Ensure group "kafka" exists
+      ansible.builtin.group:
+        name: kafka
+        gid: 10000
+        state: present  
     - name: remove Create a user 'kafka' with a home directory
       ansible.builtin.user:
         name: kafka
@@ -38,7 +43,7 @@
         system: true
         shell: /sbin/nologin
         uid: 10000
-        gid: 10000
+        group: kafka
     - name: Create a Quadlet file for a volume
       containers.podman.podman_volume:
         state: quadlet
