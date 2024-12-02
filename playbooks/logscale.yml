@@ -24,7 +24,7 @@
             state: present
 
 - name: Kafka Steps
-  hosts: kafka
+  hosts: controllers
   serial: 1
   tasks:
     - name: create kafka
