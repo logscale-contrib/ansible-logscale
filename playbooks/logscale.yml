@@ -29,21 +29,17 @@
   tasks:
     - name: Ensure group "kafka" exists
       ansible.builtin.group:
-        name: kafka
-        gid: 10000
+        name: kafka-controller
+        gid: 10001
         state: present  
-    - name: remove Create a user 'kafka' with a home directory
-      ansible.builtin.user:
-        name: kafka
-        state: absent
     - name: Create a user 'kafka' with a home directory
       ansible.builtin.user:
-        name: kafka
+        name: kafka-controller
         create_home: yes
         system: true
         shell: /sbin/nologin
-        uid: 10000
-        group: kafka
+        uid: 10001
+        group: kafka-controller
     - name: Create a Quadlet file for a volume
       containers.podman.podman_volume:
         state: quadlet
@@ -55,7 +51,7 @@
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
         # network: host
-        user: 10000
+        user: kafka-controller
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
