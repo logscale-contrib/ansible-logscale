@@ -32,7 +32,7 @@
       containers.podman.podman_container:
         name: kafka
         image: apache/kafka:3.9.0
-        state: absent
+        state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
         network: host
         env:
