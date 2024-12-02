@@ -56,3 +56,12 @@
         #   - |
         #     [Install]
         #     WantedBy=default.target
+    - name: Just force systemd to reread configs (2.4 and above)
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka
+        enabled: true
+        masked: no
+        state: started
