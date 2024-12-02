@@ -30,6 +30,10 @@
     - name: Create a user 'kafka' with a home directory
       ansible.builtin.user:
         name: kafka
+        state: absent
+    - name: Create a user 'kafka' with a home directory
+      ansible.builtin.user:
+        name: kafka
         create_home: yes
         system: true
         shell: /sbin/nologin
