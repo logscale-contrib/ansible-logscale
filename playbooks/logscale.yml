@@ -42,7 +42,8 @@
         image: apache/kafka:3.9.0
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
-        network: host
+        # network: host
+        user: kafka
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
@@ -66,7 +67,7 @@
         daemon_reload: true
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
-        name: kafka
+        name: kafka-controller
         enabled: true
         masked: no
         state: started
