@@ -1,0 +1,14 @@
+---
+- name: Update web servers
+  hosts: all
+  # remote_user: root
+
+  tasks:
+    - name: Install Podman
+      hosts: all
+      become: true
+      block:
+        - name: Ensure Podman is installed
+          ansible.builtin.dnf:
+            name: podman
+            state: present
