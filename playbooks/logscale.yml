@@ -40,10 +40,7 @@
         name: kafkadata
     - name: create kafka
       become: true
-      become_user: kafka
-      become_method: sudo
-      become_flags: "-i"
-      shell: "env"
+      become_user: kafka      
       containers.podman.podman_container:
         name: kafka-controller
         image: apache/kafka:3.9.0
