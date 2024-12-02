@@ -22,3 +22,38 @@
           ansible.builtin.dnf:
             name: podman
             state: present
+
+# - name: Kafka Steps
+#   hosts: kafka
+#   serial: 1
+#   tasks:
+#     - name: create kafka
+#       containers.podman.podman_container:
+#         name: kafka
+#         image: apache/kafka:3.9.0
+#         state: quadlet
+#         # device: "/dev/sda:/dev/xvda:rwm"
+#         network: host
+#         env:
+#           KAFKA_NODE_ID: "{{ kafkaId }}"
+#           KAFKA_PROCESS_ROLES: broker,controller
+#           KAFKA_LISTENERS: PLAINTEXT://:9092
+#           KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+#           KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+#           KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+#           KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+#           KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+#           KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+#           KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+#           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+#           KAFKA_NUM_PARTITIONS: 3
+#         ports:
+#           - "8080:80"
+#         volumes:
+#           - "/var/www:/usr/share/nginx/html"
+#         quadlet_options:
+#           - "AutoUpdate=registry"
+#           - "Pull=newer"
+#           - |
+#             [Install]
+#             WantedBy=default.target

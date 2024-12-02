@@ -1,16 +1,33 @@
 all:
   hosts:
-    kafka1:
+    controller1:
+      ansible_host: 10.0.135.103
+    controller2:
+      ansible_host: 10.0.152.234
+    controller3:
+      ansible_host: 10.0.161.58
+    broker1:
       ansible_host: 10.0.140.39
-    kafka2:
+      kafkaId: 1
+    broker2:
       ansible_host: 10.0.153.106
-    kakfa3:
+      kafkaId: 2
+    broker3:
       ansible_host: 10.0.167.55
-kafka:
+      kafkaId: 3
+brokers:
   hosts:
-    kafka1:
+    broker1:
       ansible_host: 10.0.140.39
-    kafka2:
+    broker2:
       ansible_host: 10.0.153.106
-    kakfa3:
+    broker3:
       ansible_host: 10.0.167.55
+controllers:
+  hosts:
+    controller1:
+      ansible_host: 10.0.135.103
+    controller2:
+      ansible_host: 10.0.152.234
+    controller3:
+      ansible_host: 10.0.161.58
