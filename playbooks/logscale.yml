@@ -36,7 +36,7 @@
       containers.podman.podman_volume:
         state: quadlet
         name: kafkadata
-    - name: create kafka
+    - name: kafka
       containers.podman.podman_container:
         name: kafka-controller
         image: apache/kafka:3.9.0
