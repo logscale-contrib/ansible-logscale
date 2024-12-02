@@ -61,12 +61,12 @@
         #   - |
         #     [Install]
         #     WantedBy=default.target
-    # - name: Enable service kafka and ensure it is not masked
-    #   become: true
-    #   become_user: kafka-controller
-    #   ansible.builtin.systemd_service:
-    #     name: kafka
-    #     daemon_reload: true
-    #     enabled: true
-    #     masked: no
-    #     state: started
+    - name: Daemon Reload
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka
+        enabled: true
+        masked: no
+        state: started
