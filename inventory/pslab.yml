@@ -29,9 +29,12 @@ controllers:
   hosts:
     controller1:
       ansible_host: 10.0.135.103
+      kafkaId: 1
     controller2:
       ansible_host: 10.0.152.234
+      kafkaId: 2
     controller3:
       ansible_host: 10.0.161.58
+      kafkaId: 3
   vars:
     kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
