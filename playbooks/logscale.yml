@@ -22,11 +22,14 @@
           ansible.builtin.dnf:
             name: podman
             state: present
-
 - name: Kafka Controllers
   hosts: controllers
   serial: 1
   tasks:
+    - name: Create a Quadlet file for a volume
+      containers.podman.podman_volume:
+        state: quadlet
+        name: kafkadata
     - name: create kafka
       become: true
       containers.podman.podman_container:
@@ -43,10 +46,10 @@
           KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-        ports:
-          - "8080:80"
-        volumes:
-          - "/var/www:/usr/share/nginx/html"
+        # ports:
+        #   - "8080:80"
+        # volumes:
+        #   - "kafkadata:/usr/share/nginx/html"
         quadlet_options:
           - "AutoUpdate=registry"
           - "Pull=newer"
