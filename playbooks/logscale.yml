@@ -59,6 +59,8 @@
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
+        tmpfs:
+          - "/opt/kafka/config"
         # quadlet_options:
         #   - "AutoUpdate=registry"
         #   - "Pull=newer"
