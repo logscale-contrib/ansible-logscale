@@ -59,7 +59,7 @@
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
-        network: host
+        # network: host
         tmpfs:
           "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
         quadlet_options:
@@ -120,7 +120,7 @@
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
-        network: host
+        # network: host
         tmpfs:
           "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
         quadlet_options:
