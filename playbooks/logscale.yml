@@ -56,7 +56,7 @@
           KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-          KAFKA_LOGS_DIR: "/data"
+          KAFKA_LOG_DIR: "/data"
         # ports:
         #   - "8080:80"
         volumes:
