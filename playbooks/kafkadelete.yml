@@ -1,0 +1,17 @@
+- name: Kfaka 
+  hosts: brokers,controllers
+  become: true
+  tasks:
+    - name: kafka
+      containers.podman.podman_container:
+        name: kafka
+        state: absent
+    - name: Create a Quadlet file for a volume kafka-logs
+      containers.podman.podman_volume:
+        state: quadlet
+        name: kafka-logs
+    - name: Create a Quadlet file for a volume kafka-data
+      containers.podman.podman_volume:
+        state: quadlet
+        name: kafka-data
+
