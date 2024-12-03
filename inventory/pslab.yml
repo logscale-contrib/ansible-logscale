@@ -28,7 +28,7 @@ all:
 controllers:
   hosts:
     controller1:
-      ansible_host: 10.0.135.103
+      ansible_host: 10.0.129.65
       kafkaId: 1
     # controller2:
     #   ansible_host: 10.0.152.234
