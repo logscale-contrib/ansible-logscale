@@ -31,9 +31,6 @@
         name: kafka
         image: apache/kafka:3.9.0
         state: quadlet
-        # device: "/dev/sda:/dev/xvda:rwm"
-        # network: host
-        # user: 10001
         read_only: true
         read_only_tmpfs: true
         env:
@@ -82,15 +79,11 @@
         name: kafka
         image: apache/kafka:3.9.0
         state: quadlet
-        # device: "/dev/sda:/dev/xvda:rwm"
-        # network: host
-        # user: 10001
         read_only: true
         read_only_tmpfs: true
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: broker
-          KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_LISTENERS: "PLAINTEXT://:9091,PLAINTEXT_HOST://:9092"
           KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
           KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://{{ inventory_hostname }}:9091,PLAINTEXT_HOST://{{ inventory_hostname }}:9092"
@@ -98,6 +91,7 @@
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
           KAFKA_LOG_DIR: "/data"
+          KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
         ports:
           - "9091:9091"
           - "9092:9092"
