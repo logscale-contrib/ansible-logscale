@@ -45,7 +45,7 @@
         # network: host
         # user: 10001
         read_only: true
-        read_only_tmpfs: false
+        read_only_tmpfs: true
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
@@ -61,7 +61,7 @@
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
         tmpfs:
-          "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup"
+          "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
         # quadlet_options:
         #   - "AutoUpdate=registry"
         #   - "Pull=newer"
