@@ -43,13 +43,12 @@
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
           KAFKA_LOG_DIR: "/data"
           KAFKA_CLUSTER_ID: "{{ kafkaClusterID }}"
-        # ports:
-        #   - "9093:9093"
-        network: host
+        ports:
+          - "9093:9093"
+        # network: host
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
-        # network: host
         tmpfs:
           "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
         quadlet_options:
