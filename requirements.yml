@@ -1,7 +1,6 @@
 ---
 collections:
   - name: containers.podman
-  - name: dragomirr.kafka
-    source: https://github.com/logscale-contrib/ansible-role-kafka.git
+  - source: https://github.com/logscale-contrib/ansible-role-kafka.git
     type: git
     version: main
