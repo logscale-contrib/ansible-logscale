@@ -60,7 +60,7 @@
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
         tmpfs:
-          - "/opt/kafka/config"
+          "/opt/kafka/config": "tmpcopyup"
         # quadlet_options:
         #   - "AutoUpdate=registry"
         #   - "Pull=newer"
