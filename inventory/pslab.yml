@@ -5,7 +5,7 @@ all:
     controller2:
       ansible_host: 10.0.149.189
     controller3:
-      ansible_host: 10.0.169.126
+      ansible_host: 10.0.163.213
     broker1:
       ansible_host: 10.0.141.91
     broker2:
@@ -24,7 +24,7 @@ brokers:
       ansible_host: 10.0.161.4
       kafkaId: 103
   vars:
-    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.169.126:9093
+    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
 controllers:
   hosts:
     controller1:
@@ -34,7 +34,7 @@ controllers:
       ansible_host: 10.0.149.189
       kafkaId: 2
     controller3:
-      ansible_host: 10.0.169.126
+      ansible_host: 10.0.163.213
       kafkaId: 3
   vars:
-    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.169.126:9093
+    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
