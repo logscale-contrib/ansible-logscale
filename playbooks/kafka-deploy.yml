@@ -15,8 +15,15 @@
       tags:
         - openjdk
     - name: Install the zulu-17 rpm from a remote repo
+      
       ansible.builtin.dnf:
         name: zulu17-jdk == 17.0.13-1
         state: present
       tags:
         - openjdk
+    - name: Add another bin dir to system-wide $PATH.
+      ansible.builtin.copy:
+        owner: root
+        group: root
+        dest: /etc/profile.d/azul.sh
+        content: "PATH=$PATH:/usr/lib/jvm/zulu17/bin"
