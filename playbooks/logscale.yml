@@ -40,11 +40,11 @@
         state: quadlet
         name: kafka-tmpfs
     - name: kafka
+      notify: Restart Kafka Controller
       containers.podman.podman_container:
         name: kafka-controller
         image: apache/kafka:3.9.0
         state: quadlet
-        notify: Restart Kafka Controller
         # device: "/dev/sda:/dev/xvda:rwm"
         # network: host
         # user: 10001
