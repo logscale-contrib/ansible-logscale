@@ -25,6 +25,7 @@ brokers:
       kafkaId: 103
   vars:
     kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
+    kafkaClusterID: 9e6bc19f-11c8-44d2-9248-e16a532120d6
 controllers:
   hosts:
     controller1:
@@ -38,3 +39,4 @@ controllers:
       kafkaId: 3
   vars:
     kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
+    kafkaClusterID: 9e6bc19f-11c8-44d2-9248-e16a532120d6
