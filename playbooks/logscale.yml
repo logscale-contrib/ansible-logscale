@@ -26,14 +26,18 @@
   become: true
   tasks:
     - name: kafkaold
-      notify: Restart Kafka broker
+      containers.podman.podman_container:
+        name: kafka-broker
+        state: absent
+    - name: kafkaold2
       containers.podman.podman_container:
         name: kafka-controller
         state: absent
+
     - name: kafka
-      notify: Restart Kafka broker
+      notify: Restart Kafka
       containers.podman.podman_container:
-        name: kafka-broker
+        name: kafka
         image: apache/kafka:3.9.0
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
@@ -67,24 +71,32 @@
         daemon_reload: true
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
-        name: kafka-broker
+        name: kafka
         enabled: true
         masked: no
         state: started
   handlers:
-    - name: Restart Kafka Controller
+    - name: Restart Kafka
       ansible.builtin.systemd_service:
-        name: kafka-broker
+        name: kafka
         state: restarted
 
 - name: Kafka Brokers
   hosts: brokers
   become: true
   tasks:
-    - name: kafka
-      notify: Restart Kafka Controller
+    - name: kafkaold
+      containers.podman.podman_container:
+        name: kafka-broker
+        state: absent
+    - name: kafkaold2
       containers.podman.podman_container:
         name: kafka-controller
+        state: absent
+    - name: kafka
+      notify: Restart Kafka
+      containers.podman.podman_container:
+        name: kafka
         image: apache/kafka:3.9.0
         state: quadlet
         # device: "/dev/sda:/dev/xvda:rwm"
@@ -120,12 +132,12 @@
         daemon_reload: true
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
-        name: kafka-controller
+        name: kafka
         enabled: true
         masked: no
         state: started
   handlers:
-    - name: Restart Kafka Controller
+    - name: Restart Kafka
       ansible.builtin.systemd_service:
-        name: kafka-controller
+        name: kafka
         state: restarted
