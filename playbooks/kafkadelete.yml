@@ -38,15 +38,19 @@
     - name: remove
       ignore_errors: true
       ansible.builtin.file:
+        state: absent
         path: /etc/containers/systemd/kafka-controller.container
     - name: remove
       ignore_errors: true
       ansible.builtin.file:
+        state: absent
         path: /etc/containers/systemd/kafka-broker.container
     - name: remove
       ignore_errors: true
       ansible.builtin.file:
+        state: absent
         path: /etc/containers/systemd/kafka.container
+
     - name: Daemon Reload
       ansible.builtin.systemd_service:
         daemon_reload: true
