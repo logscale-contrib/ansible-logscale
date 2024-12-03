@@ -1,40 +1,40 @@
 all:
   hosts:
     controller1:
-      ansible_host: 10.0.135.103
-    controller2:
-      ansible_host: 10.0.152.234
-    controller3:
-      ansible_host: 10.0.161.58
-    broker1:
-      ansible_host: 10.0.140.39
-      kafkaId: 1
-    broker2:
-      ansible_host: 10.0.153.106
-      kafkaId: 2
-    broker3:
-      ansible_host: 10.0.167.55
-      kafkaId: 3
-brokers:
-  hosts:
-    broker1:
-      ansible_host: 10.0.140.39
-    broker2:
-      ansible_host: 10.0.153.106
-    broker3:
-      ansible_host: 10.0.167.55
-  vars:
-    kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
+      ansible_host: 10.0.129.65
+#     controller2:
+#       ansible_host: 10.0.152.234
+#     controller3:
+#       ansible_host: 10.0.161.58
+#     broker1:
+#       ansible_host: 10.0.140.39
+#       kafkaId: 1
+#     broker2:
+#       ansible_host: 10.0.153.106
+#       kafkaId: 2
+#     broker3:
+#       ansible_host: 10.0.167.55
+#       kafkaId: 3
+# brokers:
+#   hosts:
+#     broker1:
+#       ansible_host: 10.0.140.39
+#     broker2:
+#       ansible_host: 10.0.153.106
+#     broker3:
+#       ansible_host: 10.0.167.55
+#   vars:
+#     kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
 controllers:
   hosts:
     controller1:
       ansible_host: 10.0.135.103
       kafkaId: 1
-    controller2:
-      ansible_host: 10.0.152.234
-      kafkaId: 2
-    controller3:
-      ansible_host: 10.0.161.58
-      kafkaId: 3
+    # controller2:
+    #   ansible_host: 10.0.152.234
+    #   kafkaId: 2
+    # controller3:
+    #   ansible_host: 10.0.161.58
+    #   kafkaId: 3
   vars:
     kafkaControllerQuorumVoters: 1@10.0.135.103:9093,2@10.0.152.234:9093,3@10.0.161.58:9093
