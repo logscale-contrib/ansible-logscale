@@ -2,16 +2,16 @@
   hosts: brokers,controllers
   become: true
   tasks:
-    - name: kafka
+    - name: delete kafka
       containers.podman.podman_container:
         name: kafka
         state: absent
-    - name: Create a Quadlet file for a volume kafka-logs
+    - name: delete a Quadlet file for a volume kafka-logs
       containers.podman.podman_volume:
-        state: quadlet
+        state: absent
         name: kafka-logs
-    - name: Create a Quadlet file for a volume kafka-data
+    - name: delete a Quadlet file for a volume kafka-data
       containers.podman.podman_volume:
-        state: quadlet
+        state: absent
         name: kafka-data
 
