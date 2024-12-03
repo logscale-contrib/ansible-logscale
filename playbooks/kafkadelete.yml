@@ -1,10 +1,22 @@
-- name: Kfaka 
+- name: Kfaka
   hosts: brokers,controllers
   become: true
   tasks:
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
         name: kafka
+        enabled: false
+        masked: no
+        state: stopped
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka-broker
+        enabled: false
+        masked: no
+        state: stopped
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka-controller
         enabled: false
         masked: no
         state: stopped
@@ -20,4 +32,15 @@
       containers.podman.podman_volume:
         state: absent
         name: kafka-data
-
+    - name: remove
+      ansible.builtin.file:
+        path: /etc/containers/systemd/kafka-controller.container
+    - name: remove
+      ansible.builtin.file:
+        path: /etc/containers/systemd/kafka-broker.container
+    - name: remove
+      ansible.builtin.file:
+        path: /etc/containers/systemd/kafka.container
+    - name: Daemon Reload
+      ansible.builtin.systemd_service:
+        daemon_reload: true
