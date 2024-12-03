@@ -1,42 +1,37 @@
 all:
   hosts:
-    controller1:
+    kc1:
       ansible_host: 10.0.129.65
-    controller2:
+    kc2:
       ansible_host: 10.0.149.189
-    controller3:
+    kc3:
       ansible_host: 10.0.163.213
-    broker1:
+    kb1:
       ansible_host: 10.0.141.91
-    broker2:
+    kb2:
       ansible_host: 10.0.147.143
-    broker3:
+    kb3:
       ansible_host: 10.0.161.4
-brokers:
-  hosts:
-    broker1:
-      ansible_host: 10.0.141.91
-      kafkaId: 101
-    broker2:
-      ansible_host: 10.0.147.143
-      kafkaId: 102
-    broker3:
-      ansible_host: 10.0.161.4
-      kafkaId: 103
-  vars:
-    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
-    kafkaClusterID: 9e6bc19f-11c8-44d2-9248-e16a532120d6
-controllers:
-  hosts:
-    controller1:
-      ansible_host: 10.0.129.65
-      kafkaId: 1
-    controller2:
-      ansible_host: 10.0.149.189
-      kafkaId: 2
-    controller3:
-      ansible_host: 10.0.163.213
-      kafkaId: 3
-  vars:
-    kafkaControllerQuorumVoters: 1@10.0.129.65:9093,2@10.0.149.189:9093,3@10.0.163.213:9093
-    kafkaClusterID: 9e6bc19f-11c8-44d2-9248-e16a532120d6
+kafka:
+  controllers:
+    hosts:
+      kc1:
+        kafka_node_id: 101
+      kc2:
+        kafka_node_id: 102
+      kc3:
+        kafka_node_id: 103
+    vars:
+      kafka_node_roles:
+        - controller
+  brokers:
+    hosts:
+      kb1:
+        kafka_node_id: 201
+      kb2:
+        kafka_node_id: 202
+      kb3:
+        kafka_node_id: 203
+    vars:
+      kafka_node_roles:
+        - broker
