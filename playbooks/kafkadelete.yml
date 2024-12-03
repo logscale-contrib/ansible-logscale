@@ -2,6 +2,12 @@
   hosts: brokers,controllers
   become: true
   tasks:
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka
+        enabled: false
+        masked: no
+        state: stopped
     - name: delete kafka
       containers.podman.podman_container:
         name: kafka
