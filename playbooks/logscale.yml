@@ -107,6 +107,7 @@
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: broker
+          KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_LISTENERS: "PLAINTEXT://:9091,PLAINTEXT_HOST://:9092"
           KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
           KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://{{ inventory_hostname }}:9091,PLAINTEXT_HOST://{{ inventory_hostname }}:9092"
