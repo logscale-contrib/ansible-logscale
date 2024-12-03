@@ -25,15 +25,6 @@
   serial: 1
   become: true
   tasks:
-    - name: kafkaold
-      containers.podman.podman_container:
-        name: kafka-broker
-        state: absent
-    - name: kafkaold2
-      containers.podman.podman_container:
-        name: kafka-controller
-        state: absent
-
     - name: kafka
       notify: Restart Kafka
       containers.podman.podman_container:
@@ -85,14 +76,6 @@
   hosts: brokers
   become: true
   tasks:
-    - name: kafkaold
-      containers.podman.podman_container:
-        name: kafka-broker
-        state: absent
-    - name: kafkaold2
-      containers.podman.podman_container:
-        name: kafka-controller
-        state: absent
     - name: kafka
       notify: Restart Kafka
       containers.podman.podman_container:
