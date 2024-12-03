@@ -8,19 +8,23 @@
           ansible.builtin.dnf:
             name: podman
             state: present
-- name: Kafka Controllers
-  hosts: controllers
-  serial: 1
+- name: Kfaka Common
+  hosts: brokers,controllers
   become: true
   tasks:
     - name: Create a Quadlet file for a volume kafka-logs
       containers.podman.podman_volume:
         state: quadlet
         name: kafka-logs
-    - name: Create a Quadlet file for a volume kafka-logs
+    - name: Create a Quadlet file for a volume kafka-data
       containers.podman.podman_volume:
         state: quadlet
         name: kafka-data
+- name: Kafka Controllers
+  hosts: controllers
+  serial: 1
+  become: true
+  tasks:
     - name: kafka
       notify: Restart Kafka Controller
       containers.podman.podman_container:
@@ -49,12 +53,63 @@
         network: host
         tmpfs:
           "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
-        # quadlet_options:
-        #   - "AutoUpdate=registry"
-        #   - "Pull=newer"
-        #   - |
-        #     [Install]
-        #     WantedBy=default.target
+        quadlet_options:
+          - |
+            [Install]
+            WantedBy=multi-user.target
+    - name: Daemon Reload
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: Enable service kafka and ensure it is not masked
+      ansible.builtin.systemd_service:
+        name: kafka-controller
+        enabled: true
+        masked: no
+        state: started
+  handlers:
+    - name: Restart Kafka Controller
+      ansible.builtin.systemd_service:
+        name: kafka-controller
+        state: restarted
+
+- name: Kafka Brokers
+  hosts: brokers
+  become: true
+  tasks:
+    - name: kafka
+      notify: Restart Kafka Controller
+      containers.podman.podman_container:
+        name: kafka-controller
+        image: apache/kafka:3.9.0
+        state: quadlet
+        # device: "/dev/sda:/dev/xvda:rwm"
+        # network: host
+        # user: 10001
+        read_only: true
+        read_only_tmpfs: true
+        env:
+          KAFKA_NODE_ID: "{{ kafkaId }}"
+          KAFKA_PROCESS_ROLES: broker
+          KAFKA_LISTENERS: 'PLAINTEXT://:9091,PLAINTEXT_HOST://:9092'
+          KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+          KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://{{ inventory_hostname }}:9091,PLAINTEXT_HOST://{{ inventory_hostname }}:9092'
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT      
+          KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
+          KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+          KAFKA_LOG_DIR: "/data"
+        ports:
+          - "9091:9091"
+          - "9092:9092"
+        volumes:
+          - "kafka-data:/data"
+          - "kafka-logs:/opt/kafka/logs"
+        network: host
+        tmpfs:
+          "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
+        quadlet_options:
+          - |
+            [Install]
+            WantedBy=multi-user.target
     - name: Daemon Reload
       ansible.builtin.systemd_service:
         daemon_reload: true
