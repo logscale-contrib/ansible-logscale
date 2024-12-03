@@ -1,5 +1,7 @@
-default:
+all:
   hosts:
+    # localhost:
+    #   ansible_connection: local
     kc1:
       ansible_host: 10.0.129.65
     kc2:
@@ -12,26 +14,37 @@ default:
       ansible_host: 10.0.147.143
     kb3:
       ansible_host: 10.0.161.4
-kafka:
-  controllers:
-    hosts:
-      kc1:
-        kafka_node_id: 101
-      kc2:
-        kafka_node_id: 102
-      kc3:
-        kafka_node_id: 103
-    vars:
-      kafka_node_roles:
-        - controller
-  brokers:
-    hosts:
-      kb1:
-        kafka_node_id: 201
-      kb2:
-        kafka_node_id: 202
-      kb3:
-        kafka_node_id: 203
-    vars:
-      kafka_node_roles:
-        - broker
+  # vars:
+  #   ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
+  #   ansible_user: ec2-user
+  children:
+    kafka:
+      children:
+        controllers:
+          hosts:
+            kc1:
+              kafka_node_id: 101
+            kc2:
+              kafka_node_id: 102
+            kc3:
+              kafka_node_id: 103
+          vars:
+            kafka_node_roles:
+              - controller
+        brokers:
+          hosts:
+            kb1:
+              kafka_node_id: 201
+            kb2:
+              kafka_node_id: 202
+            kb3:
+              kafka_node_id: 203
+          vars:
+            kafka_node_roles:
+              - broker
+      vars:
+        # ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
+        # ansible_user: ec2-user
+        kafka_install_dependencies: false
+        kafka_scala_version: 2.13
+        kafka_version: 3.9.0

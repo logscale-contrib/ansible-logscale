@@ -1,7 +1,7 @@
 - name: Kafka
-  hosts: brokers,controllers
+  hosts: kafka
   become: true
-  tasks:
+  pre_tasks:
     - name: Import azul key from a url
       ansible.builtin.rpm_key:
         state: present
@@ -14,18 +14,32 @@
         state: present
       tags:
         - openjdk
-    - name: Install the zulu-17 rpm from a remote repo
-
-      ansible.builtin.dnf:
-        name: zulu17-jdk == 17.0.13-1
-        state: present
-      tags:
-        - openjdk
-    - name: Add another bin dir to system-wide $PATH.
-      ansible.builtin.copy:
-        owner: root
-        group: root
-        dest: /etc/profile.d/azul.sh
-        content: "PATH=$PATH:/usr/lib/jvm/zulu17/bin"
-  roles:
-  
+    # - name: Install the zulu-17 rpm from a remote repo
+    #   # notify: Restart Kafka
+    #   ansible.builtin.dnf:
+    #     name: zulu17-jdk # == 17.0.13-1
+    #     state: present
+    #   tags:
+    #     - openjdk
+  #   - name: Add another bin dir to system-wide $PATH.
+  #     ansible.builtin.copy:
+  #       owner: root
+  #       group: root
+  #       dest: /etc/profile.d/azul.sh
+  #       content: "PATH=$PATH:/usr/lib/jvm/zulu17/bin"
+  # roles:
+  #   - role: ansible-role-kafka
+  #     # setting kafka_node_id in play is only valid if you have 1 kafka node
+  #     # if you have multiple kafka nodes you need to set unique kafka_node_id for each node
+  #     kafka_heap_size: 2G
+  #     kafka_topics:
+  #       - name: topic1
+  #       - name: topic2
+  #         replication_factor: 1
+  #         partitions: 10
+  #     # adding config that is not defined by role
+  #     kafka_additional_config:
+  #       message.max.bytes: 10000
+  #     # adding kafka startup options
+  #     kafka_opts:
+  #       - -XX:NewSize=256m
