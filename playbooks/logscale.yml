@@ -35,10 +35,6 @@
       containers.podman.podman_volume:
         state: quadlet
         name: kafka-data
-    - name: Create a Quadlet file for a volume kafka-logs
-      containers.podman.podman_volume:
-        state: quadlet
-        name: kafka-tmpfs
     - name: kafka
       notify: Restart Kafka Controller
       containers.podman.podman_container:
@@ -48,6 +44,7 @@
         # device: "/dev/sda:/dev/xvda:rwm"
         # network: host
         # user: 10001
+        read_only: true
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
@@ -62,7 +59,6 @@
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
-          - "kafka-tmpfs:/tmp"
         # quadlet_options:
         #   - "AutoUpdate=registry"
         #   - "Pull=newer"
