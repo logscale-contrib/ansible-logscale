@@ -45,6 +45,7 @@
         # network: host
         # user: 10001
         read_only: true
+        read_only_tmpfs: false
         env:
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
