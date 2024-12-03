@@ -44,6 +44,7 @@
         name: kafka-controller
         image: apache/kafka:3.9.0
         state: quadlet
+        notify: Restart Kafka Controller
         # device: "/dev/sda:/dev/xvda:rwm"
         # network: host
         # user: 10001
@@ -55,6 +56,7 @@
           KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+          KAFKA_LOGS_DIR: "/data"
         # ports:
         #   - "8080:80"
         volumes:
@@ -76,3 +78,8 @@
         enabled: true
         masked: no
         state: started
+  handlers:
+    - name: Restart Kafka Controller
+      ansible.builtin.systemd_service:
+        name: kafka-controller
+        state: restarted
