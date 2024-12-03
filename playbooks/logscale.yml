@@ -8,10 +8,26 @@
           ansible.builtin.dnf:
             name: podman
             state: present
+- name: Kfaka reset
+  hosts: brokers,controllers
+  become: true
+  tasks:
+    - name: Create a Quadlet file for a volume kafka-logs
+      containers.podman.podman_volume:
+        state: absent
+        name: kafka-logs
+    - name: Create a Quadlet file for a volume kafka-data
+      containers.podman.podman_volume:
+        state: absent
+        name: kafka-data            
 - name: Kfaka Common
   hosts: brokers,controllers
   become: true
   tasks:
+    - name: kafka
+      containers.podman.podman_container:
+        name: kafka
+        state: absent
     - name: Create a Quadlet file for a volume kafka-logs
       containers.podman.podman_volume:
         state: quadlet
