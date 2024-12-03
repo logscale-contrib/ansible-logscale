@@ -55,11 +55,12 @@
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
           KAFKA_LOG_DIR: "/data"
-        # ports:
-        #   - "8080:80"
+        ports:
+          - "9093:9093"
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
+        network: host
         tmpfs:
           "/opt/kafka/config": "rw,noexec,nosuid,nodev,tmpcopyup,mode=1777"
         # quadlet_options:
