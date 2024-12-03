@@ -1,0 +1,16 @@
+- name: Kafka
+  hosts: brokers,controllers
+  become: true
+  tasks:
+    - name: Import azul key from a url
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://www.azul.com/wp-content/uploads/2021/05/0xB1998361219BD9C9.txt
+    - name: Install the nginx rpm from a remote repo
+      ansible.builtin.dnf:
+        name: "https://cdn.azul.com/zulu/bin/zulu-repo-1.0.0-1.noarch.rpm"
+        state: present
+    - name: Install the zulu-11 rpm from a remote repo
+      ansible.builtin.dnf:
+        name: zulu17-jdk
+        state: present
