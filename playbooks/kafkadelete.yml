@@ -7,19 +7,19 @@
         name: kafka
         enabled: false
         masked: no
-        state: stopped
+        state: absent
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
         name: kafka-broker
         enabled: false
         masked: no
-        state: stopped
+        state: absent
     - name: Enable service kafka and ensure it is not masked
       ansible.builtin.systemd_service:
         name: kafka-controller
         enabled: false
         masked: no
-        state: stopped
+        state: absent
     - name: delete kafka
       containers.podman.podman_container:
         name: kafka
