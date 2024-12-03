@@ -1,6 +1,5 @@
 ---
 collections:
   - name: containers.podman
-  - name: https://github.com/logscale-contrib/ansible-role-kafka.git
-    type: git
-    version: "main"
+roles:
+  - src: git+https://github.com/logscale-contrib/ansible-role-kafka.git
