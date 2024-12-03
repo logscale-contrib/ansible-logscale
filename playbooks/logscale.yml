@@ -15,11 +15,9 @@
   tasks:
     - name: Create a Quadlet file for a volume kafka-logs
       containers.podman.podman_volume:
-        state: absent
         name: kafka-logs
     - name: Create a Quadlet file for a volume kafka-data
       containers.podman.podman_volume:
-        state: absent
         name: kafka-data
 
 - name: Kafka Controllers
@@ -39,14 +37,16 @@
           KAFKA_NODE_ID: "{{ kafkaId }}"
           KAFKA_PROCESS_ROLES: controller
           KAFKA_LISTENERS: CONTROLLER://:9093
+          KAFKA_ADVERTISED_LISTENERS: "CONTROLLER://{{ ansible_host }}:9093"
           KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
           KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
           KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafkaControllerQuorumVoters }}"
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
           KAFKA_LOG_DIR: "/data"
           KAFKA_CLUSTER_ID: "{{ kafkaClusterID }}"
-        ports:
-          - "9093:9093"
+        # ports:
+        #   - "9093:9093"
+        network: host
         volumes:
           - "kafka-data:/data"
           - "kafka-logs:/opt/kafka/logs"
