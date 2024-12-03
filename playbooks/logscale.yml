@@ -27,10 +27,18 @@
   serial: 1
   become: true
   tasks:
-    - name: Create a Quadlet file for a volume
+    - name: Create a Quadlet file for a volume kafka-logs
       containers.podman.podman_volume:
         state: quadlet
-        name: kafkadata
+        name: kafka-logs
+    - name: Create a Quadlet file for a volume kafka-logs
+      containers.podman.podman_volume:
+        state: quadlet
+        name: kafka-data
+    - name: Create a Quadlet file for a volume kafka-logs
+      containers.podman.podman_volume:
+        state: quadlet
+        name: kafka-tmpfs
     - name: kafka
       containers.podman.podman_container:
         name: kafka-controller
@@ -49,8 +57,10 @@
           KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
         # ports:
         #   - "8080:80"
-        # volumes:
-        #   - "kafkadata:/usr/share/nginx/html"
+        volumes:
+          - "kafka-data:/data"
+          - "kafka-logs:/opt/kafka/logs"
+          - "kafka-tmpfs:/tmp"
         # quadlet_options:
         #   - "AutoUpdate=registry"
         #   - "Pull=newer"
