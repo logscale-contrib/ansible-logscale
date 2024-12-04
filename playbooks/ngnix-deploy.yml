@@ -1,0 +1,18 @@
+---
+- name: Load Balancer
+  hosts: all
+  roles:
+    - role: ansible-role-nginx
+      nginx_service_modify: true
+      nginx_service_timeout: 95
+      nginx_logrotate_conf_enable: true
+      nginx_logrotate_conf:
+        paths: /var/log/nginx/*.log
+        options:
+          - daily
+          - missingok
+          - rotate 14
+          - compress
+          - delaycompress
+          - notifempty
+          - sharedscripts

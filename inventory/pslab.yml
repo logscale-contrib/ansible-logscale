@@ -1,7 +1,7 @@
 all:
   hosts:
-    # localhost:
-    #   ansible_connection: local
+    lb:
+      ansible_connection: local
     kc1:
       ansible_host: 10.0.129.65
     kc2:
@@ -71,3 +71,6 @@ all:
             lc2:
             lc3:
           vars:
+    lb:
+      hosts:
+        lb:
