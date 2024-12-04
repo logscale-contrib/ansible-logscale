@@ -31,7 +31,6 @@
     - role: ansible-role-kafka
       # setting kafka_node_id in play is only valid if you have 1 kafka node
       # if you have multiple kafka nodes you need to set unique kafka_node_id for each node
-      kafka_heap_size: 2G
       kafka_topics:
         - name: "{{ logscale_kafka_topic_prefix }}-ingest"
           replication_factor: 2
@@ -92,5 +91,15 @@
         # max message size for all topics by default:
         message.max.bytes: 104857600
         # compression.type: producer
+      kafka_heap_size: "{{ kafka_heap_size }}"
       kafka_opts:
         - -XX:NewSize=256m
+        - "-Xms{{ kafka_heap_size }}"
+        - -XX:MetaspaceSize=96m
+        - -XX:+UseG1GC
+        - -XX:MaxGCPauseMillis=20
+        - -XX:InitiatingHeapOccupancyPercent=35
+        - -XX:G1HeapRegionSize=16M
+        - -XX:MinMetaspaceFreeRatio=50
+        - -XX:MaxMetaspaceFreeRatio=80
+        - -XX:+ExplicitGCInvokesConcurrent
