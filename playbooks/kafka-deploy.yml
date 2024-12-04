@@ -17,7 +17,7 @@
     - name: Install the zulu-17 rpm from a remote repo
       notify: Restart Kafka
       ansible.builtin.dnf:
-        name: zulu17-jdk-headless-17.0.12-1
+        name: zulu17-jdk-headless-17.0.13-1
         state: present
       tags:
         - openjdk
