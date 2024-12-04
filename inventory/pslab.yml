@@ -63,3 +63,11 @@ all:
         - -XX:MinMetaspaceFreeRatio=50
         - -XX:MaxMetaspaceFreeRatio=80
         - -XX:+ExplicitGCInvokesConcurrent
+    logscale:
+      children:
+        logscaleAllInOne:
+          hosts:
+            lc1:
+            lc2:
+            lc3:
+          vars:
