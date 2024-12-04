@@ -15,7 +15,7 @@ all:
     kb3:
       ansible_host: 10.0.161.4
     lc1:
-      ansible_host: 10.0.18.175
+      ansible_host: 10.0.129.217
     lc2:
       ansible_host: 10.0.144.176
     lc3:
