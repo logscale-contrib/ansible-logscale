@@ -94,7 +94,6 @@
       kafka_heap_size: "{{ kafka_heap_size }}"
       kafka_opts:
         - -XX:NewSize=256m
-        # - "-Xms{{ kafka_heap_size }}"
         - -XX:MetaspaceSize=96m
         - -XX:+UseG1GC
         - -XX:MaxGCPauseMillis=20
