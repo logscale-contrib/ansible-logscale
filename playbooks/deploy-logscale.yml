@@ -2,4 +2,4 @@
   hosts: logscale
   become: true
   roles:
-    - role: nginxinc.nginx
+    - role: ansible-role-logscale
