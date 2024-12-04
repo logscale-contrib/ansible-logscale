@@ -19,7 +19,7 @@ all:
     lc2:
       ansible_host: 10.0.144.176
     lc3:
-      ansible_host: 10.0.47.86
+      ansible_host: 10.0.172.134
   vars:
     logscale_kafka_topic_prefix: g001
   children:
