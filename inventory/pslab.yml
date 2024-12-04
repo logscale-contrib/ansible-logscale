@@ -14,9 +14,10 @@ all:
       ansible_host: 10.0.147.143
     kb3:
       ansible_host: 10.0.161.4
-  # vars:
-  #   ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
-  #   ansible_user: ec2-user
+  vars:
+    logscale_kafka_topic_prefix: g001
+    # ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
+    # ansible_user: ec2-user
   children:
     kafka:
       children:
