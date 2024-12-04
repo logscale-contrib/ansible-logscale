@@ -90,10 +90,10 @@
         # adding kafka startup options
         # max message size for all topics by default:
         message.max.bytes: 104857600
-        # compression.type: producer
-      kafka_heap_size: "{{ kafka_heap_size }}"
+        # compression.type: producer      
       kafka_opts:
         - -XX:NewSize=256m
+        - "-Xms{{ kafka_heap_size }}"
         - -XX:MetaspaceSize=96m
         - -XX:+UseG1GC
         - -XX:MaxGCPauseMillis=20
