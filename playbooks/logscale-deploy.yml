@@ -1,0 +1,5 @@
+- name: Logscale
+  hosts: logscale
+  become: true
+  roles:
+    - role: ansible-role-logscale
