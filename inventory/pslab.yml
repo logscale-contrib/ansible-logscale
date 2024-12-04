@@ -14,10 +14,14 @@ all:
       ansible_host: 10.0.147.143
     kb3:
       ansible_host: 10.0.161.4
+    lc1:
+      ansible_host: 10.0.18.175
+    lc2:
+      ansible_host: 10.0.144.176
+    lc3:
+      ansible_host: 10.0.47.86
   vars:
     logscale_kafka_topic_prefix: g001
-    # ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
-    # ansible_user: ec2-user
   children:
     kafka:
       children:
@@ -59,3 +63,11 @@ all:
         - -XX:MinMetaspaceFreeRatio=50
         - -XX:MaxMetaspaceFreeRatio=80
         - -XX:+ExplicitGCInvokesConcurrent
+    logscale:
+      children:
+        logscaleAllInOne:
+          hosts:
+            lc1:
+            lc2:
+            lc3:
+          vars:
