@@ -6,7 +6,6 @@
   - name: Update all packages to the latest version
     ansible.builtin.dnf:
       name: '*'
-      autoremove: true
       update_only: true
       state: present
   - name: Check if reboot is required
