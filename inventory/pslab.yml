@@ -46,7 +46,8 @@ all:
       vars:
         # ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@ec2-44-200-157-191.compute-1.amazonaws.com"'
         # ansible_user: ec2-user
-        kafka_install_dependencies: false
+        kafka_install_dependencies: true
+        kafka__dependencies: "zulu17-jdk-headless-17.0.13-1"
         kafka_scala_version: 2.13
         kafka_version: 3.9.0
         kafka_heap_size: 2G #note sets -Xmx and -Xms
