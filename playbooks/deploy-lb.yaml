@@ -1,6 +1,7 @@
 ---
 - name: Load Balancer
   hosts: lb
+  become: true
   roles:
     - role: nginxinc.nginx
       nginx_service_modify: true
