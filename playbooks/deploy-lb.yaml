@@ -1,6 +1,6 @@
 ---
 - name: Load Balancer
-  hosts: all
+  hosts: lb
   roles:
     - role: ansible-role-nginx
       nginx_service_modify: true

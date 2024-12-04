@@ -2,7 +2,8 @@
 collections:
   - name: containers.podman
   - name: community.general
+  - name: nginxinc.nginx_core
 roles:
   - src: git+https://github.com/logscale-contrib/ansible-role-kafka.git
   - src: git+https://github.com/logscale-contrib/ansible-role-logscale.git
-  - name: nginxinc.nginx
+  
