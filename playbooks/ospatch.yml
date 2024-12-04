@@ -1,0 +1,20 @@
+---
+- name: Update the OS 
+  hosts: all
+  become: true
+  tasks:
+  - name: Update all packages to the latest version
+    ansible.builtin.dnf:
+      name: '*'
+      autoremove: true
+      update_only: true
+      state: present
+  - name: Check if reboot is required
+    ansible.builtin.shell:
+      cmd: "needs-restarting -r -s"
+    register: needs_restarting
+    changed_when: needs_restarting.rc == 1
+    failed_when: needs_restarting.rc == 0
+  - name: Do reboot if needed
+    ansible.builtin.reboot:
+    when: needs_restarting.rc == 1
