@@ -10,7 +10,7 @@
       state: present
   - name: Check if reboot is required
     ansible.builtin.shell:
-      cmd: "needs-restarting -r -s"
+      cmd: "dnf needs-restarting -rs"
     register: needs_restarting
     changed_when: needs_restarting.rc == 1
     failed_when: needs_restarting.rc > 1
