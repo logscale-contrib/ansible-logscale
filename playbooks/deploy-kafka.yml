@@ -1,9 +1,6 @@
 - name: Kafka
   hosts: kafka
   become: true
-  seuser: _default
-  serole: _default
-  setype: _default  
   roles:
     - role: ansible-role-kafka
       # setting kafka_node_id in play is only valid if you have 1 kafka node
