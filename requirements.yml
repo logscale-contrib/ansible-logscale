@@ -1,6 +1,7 @@
 ---
 collections:
   - name: community.general
+  - name: ansible.posix
 roles:
   - src: git+https://github.com/logscale-contrib/ansible-role-kafka.git
   - src: git+https://github.com/logscale-contrib/ansible-role-logscale.git
