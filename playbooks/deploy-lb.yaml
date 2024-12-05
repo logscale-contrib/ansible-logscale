@@ -25,7 +25,8 @@
         - template_file: http/default.conf.j2
           deployment_location: /etc/nginx/conf.d/default.conf
           config:
-            proxy: {}
+            proxy:
+              cache_path: []
                 
             upstreams:
               - name: logscale
