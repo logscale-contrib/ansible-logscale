@@ -6,6 +6,6 @@ collections:
 roles:
   - src: git+https://github.com/logscale-contrib/ansible-role-kafka.git
   - src: git+https://github.com/logscale-contrib/ansible-role-logscale.git
-  - name: nginxinc.nginx_config
-  - name: git+https://github.com/logscale-contrib/ansible-role-logscale.git
+  - src: git+https://github.com/logscale-contrib/ansible-role-nginx-config.git
+  - name: nginxinc.nginx
   
