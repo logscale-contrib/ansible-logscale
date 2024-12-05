@@ -78,4 +78,6 @@ all:
           hosts:
             lb:        
       vars:
-        logscale_public_url: http://ec2-44-200-157-191.compute-1.amazonaws.com
+        logscale_public_server_name: ec2-44-200-157-191.compute-1.amazonaws.com
+        logscale_public_url: "http://{{ logscale_public_server_name }}"
+        

@@ -5,6 +5,7 @@
     },
     "ansible.python.interpreterPath": "/Users/ryanfaircloth/Documents/GitHub/ansible-logscale/.venv/bin/python",
     "cSpell.words": [
-        "logscale"
+        "logscale",
+        "seuser"
     ]
 }
