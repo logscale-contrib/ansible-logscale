@@ -25,26 +25,6 @@
         - template_file: http/default.conf.j2
           deployment_location: /etc/nginx/conf.d/default.conf
           config:
-              cache_path:
-                - path: /var/cache/nginx/proxy/logscale
-                  levels: "1:1"
-                  use_temp_path: false
-                  inactive: 10m
-                  keys_zone:
-                    name: frontend_proxy_cache
-                    size: 10m
-                  max_size: 2g
-                  min_free: 1g
-                  manager_files: 100
-                  manager_sleep: 500ms
-                  manager_threshold: 200ms
-                  loader_files: 100
-                  loader_sleep: 50ms
-                  loader_threshold: 200ms
-                  purger: false
-                  purger_files: 10
-                  purger_sleep: 50ms
-                  purger_threshold: 50ms        
             upstreams:
               - name: logscale
                 least_conn: true
