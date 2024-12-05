@@ -28,7 +28,7 @@
           deployment_location: /etc/nginx/conf.d/logscale.conf
           config:
             upstreams:
-              - name: logscale
+              - name: logscaleui
                 least_conn: true
                 servers: >
                   [ {% for v in groups["logscaleAllInOne"] %}
@@ -53,7 +53,7 @@
                 locations:
                   - location: /
                     proxy:
-                      pass: http://logscale/
+                      pass: http://logscaleui/
                       http_version: 1.1
                       set_header:
                         - field: X-Forwarded-Proto
