@@ -4,6 +4,7 @@
   become: true
   roles:
     - role: nginxinc.nginx
+      nginx_selinux: true
       nginx_service_modify: true
       nginx_service_timeout: 95
       nginx_logrotate_conf_enable: true
