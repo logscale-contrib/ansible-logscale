@@ -31,7 +31,10 @@
                 servers: >
                   [ {% for v in groups["logscaleAllInOne"] %}
                     {
-                      'address':'{{ hostvars[v].ansible_host }}:{{ logscale_port }}'
+                      'address':'{{ hostvars[v].ansible_host }}:{{ logscale_port }}',
+                      max_fails: 0,
+                      fail_timeout: 10s,
+                      max_conns: 256
                     }
                     {% if not loop.last %},{% endif %}
                     {% endfor %}
