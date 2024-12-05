@@ -52,7 +52,7 @@
                 servers: >
                   [ {% for v in groups["logscaleAllInOne"] %}
                     {
-                      'address':'{{ hostvars[v].ansible_host }}:{{ logscale_port | default 8080 }}'
+                      'address':'{{ hostvars[v].ansible_host }}:{{ logscale_port }}'
                     }
                     {% if not loop.last %},{% endif %}
                     {% endfor %}
