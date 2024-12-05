@@ -72,8 +72,10 @@ all:
             lc2:
             lc3:
           vars:
+        logscaleUI:
+        logscaleIngest:
+        logscaleLB:
+          hosts:
+            lb:        
       vars:
         logscale_public_url: http://ec2-44-200-157-191.compute-1.amazonaws.com
-    lb:
-      hosts:
-        lb:
