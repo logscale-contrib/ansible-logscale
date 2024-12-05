@@ -27,16 +27,25 @@
           config:
             proxy:
               cache_path:
-                - path: /var/cache/nginx
-                  levels: 1:2
-                  keys_zone: cache:10m
-                  inactive: 60m
-                  max_size: 100m
-                - path: /var/cache/nginx
-                  levels: 1:2
-                  keys_zone: cache:10m
-                  inactive: 60m
-                  max_size: 100m                
+                - path: /var/cache/nginx/proxy/frontend
+                  levels: "1:1"
+                  use_temp_path: false
+                  inactive: 10m
+                  keys_zone:
+                    name: frontend_proxy_cache
+                    size: 10m
+                  max_size: 2g
+                  min_free: 1g
+                  manager_files: 100
+                  manager_sleep: 500ms
+                  manager_threshold: 200ms
+                  loader_files: 100
+                  loader_sleep: 50ms
+                  loader_threshold: 200ms
+                  purger: false
+                  purger_files: 10
+                  purger_sleep: 50ms
+                  purger_threshold: 50ms        
             upstreams:
               - name: logscale
                 least_conn: true
