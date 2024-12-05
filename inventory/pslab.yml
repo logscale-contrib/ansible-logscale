@@ -22,6 +22,7 @@ all:
       ansible_host: 10.0.172.134
   vars:
     logscale_kafka_topic_prefix: g001
+    logscale_port: 8080
   children:
     kafka:
       children:
