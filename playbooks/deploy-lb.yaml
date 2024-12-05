@@ -40,7 +40,7 @@
               - core:
                   listen:
                     - port: 80
-                  server_name: localhost
+                  server_name: http://ec2-44-200-157-191.compute-1.amazonaws.com/
                 log:
                   access:
                     - path: /var/log/nginx/access.log
