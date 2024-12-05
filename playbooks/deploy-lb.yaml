@@ -26,7 +26,12 @@
           deployment_location: /etc/nginx/conf.d/default.conf
           config:
             proxy:
-              cache_path: []
+              cache_path:
+                - path: /var/cache/nginx
+                  levels: 1:2
+                  keys_zone: cache:10m
+                  inactive: 60m
+                  max_size: 100m
                 
             upstreams:
               - name: logscale
